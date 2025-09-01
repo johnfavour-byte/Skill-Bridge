@@ -1,0 +1,88 @@
+{
+  "internships": [
+    {
+      "id": 101,
+      "title": "Frontend Developer Intern",
+      "description": "Join our development team to work on React applications and learn modern web development.",
+      "company": "TechStart Inc",
+      "location": "Remote",
+      "category": "programming",
+      "level": "intermediate",
+      "duration": "3 months",
+      "paid": true,
+      "salary": "$1500/month",
+      "url": "https://techstart.com/careers",
+      "icon": "💻"
+    },
+    {
+      "id": 102,
+      "title": "UX Design Intern",
+      "description": "Create user-centered designs and collaborate with our product team on exciting projects.",
+      "company": "Design Studio",
+      "location": "New York, NY",
+      "category": "design",
+      "level": "beginner",
+      "duration": "4 months",
+      "paid": true,
+      "salary": "$1200/month",
+      "url": "https://designstudio.com/careers",
+      "icon": "🎨"
+    },
+    {
+      "id": 103,
+      "title": "Marketing Intern",
+      "description": "Help grow our brand through content creation, social media, and digital campaigns.",
+      "company": "Marketing Agency",
+      "location": "Remote",
+      "category": "marketing",
+      "level": "beginner",
+      "duration": "3 months",
+      "paid": false,
+      "salary": "Unpaid + Certificate",
+      "url": "https://marketingagency.com/jobs",
+      "icon": "📱"
+    },
+    {
+      "id": 104,
+      "title": "Business Analyst Intern",
+      "description": "Analyze business data and help implement process improvements using data-driven insights.",
+      "company": "Consulting Firm",
+      "location": "Chicago, IL",
+      "category": "business",
+      "level": "intermediate",
+      "duration": "6 months",
+      "paid": true,
+      "salary": "$1800/month",
+      "url": "https://consultingfirm.com/careers",
+      "icon": "📊"
+    },
+    {
+      "id": 105,
+      "title": "Full Stack Developer Intern",
+      "description": "Work on both frontend and backend development in a fast-paced startup environment.",
+      "company": "Innovation Labs",
+      "location": "San Francisco, CA",
+      "category": "programming",
+      "level": "advanced",
+      "duration": "4 months",
+      "paid": true,
+      "salary": "$2000/month",
+      "url": "https://innovationlabs.com/internships",
+      "icon": "🚀"
+    },
+    {
+      "id": 106,
+      "title": "Social Media Intern",
+      "description": "Manage social media accounts and create engaging content for various platforms.",
+      "company": "Creative Agency",
+      "location": "Remote",
+      "category": "marketing",
+      "level": "beginner",
+      "duration": "3 months",
+      "paid": false,
+      "salary": "Unpaid + Portfolio",
+      "url": "https://creativeagency.com/jobs",
+      "icon": "📲"
+    }
+  ]
+}

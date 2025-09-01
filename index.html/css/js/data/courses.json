@@ -1,0 +1,100 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "JavaScript for Beginners",
+      "description": "Learn JavaScript programming from scratch. Perfect for complete beginners who want to start coding.",
+      "category": "programming",
+      "level": "beginner",
+      "provider": "FreeCodeCamp",
+      "duration": "6 weeks",
+      "rating": 4.8,
+      "url": "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+      "icon": "💻"
+    },
+    {
+      "id": 2,
+      "title": "Web Design Fundamentals",
+      "description": "Master HTML, CSS, and responsive design principles to create beautiful websites.",
+      "category": "design",
+      "level": "beginner",
+      "provider": "Google Design",
+      "duration": "4 weeks",
+      "rating": 4.6,
+      "url": "https://www.coursera.org/learn/web-design",
+      "icon": "🎨"
+    },
+    {
+      "id": 3,
+      "title": "Digital Marketing Basics",
+      "description": "Learn SEO, social media marketing, and content creation strategies.",
+      "category": "marketing",
+      "level": "beginner",
+      "provider": "Google Digital Garage",
+      "duration": "3 weeks",
+      "rating": 4.5,
+      "url": "https://learndigital.withgoogle.com/digitalgarage",
+      "icon": "📱"
+    },
+    {
+      "id": 4,
+      "title": "React Development",
+      "description": "Build modern web applications with React.js. Includes hooks and state management.",
+      "category": "programming",
+      "level": "intermediate",
+      "provider": "React Training",
+      "duration": "8 weeks",
+      "rating": 4.9,
+      "url": "https://reacttraining.com/",
+      "icon": "⚛️"
+    },
+    {
+      "id": 5,
+      "title": "Business Strategy",
+      "description": "Learn how to develop effective business strategies and make strategic decisions.",
+      "category": "business",
+      "level": "intermediate",
+      "provider": "Harvard Business School",
+      "duration": "5 weeks",
+      "rating": 4.7,
+      "url": "https://online.hbs.edu/",
+      "icon": "📊"
+    },
+    {
+      "id": 6,
+      "title": "Python Programming",
+      "description": "Master Python programming with hands-on projects and real-world applications.",
+      "category": "programming",
+      "level": "beginner",
+      "provider": "Codecademy",
+      "duration": "7 weeks",
+      "rating": 4.8,
+      "url": "https://www.codecademy.com/learn/learn-python-3",
+      "icon": "🐍"
+    },
+    {
+      "id": 7,
+      "title": "Graphic Design Principles",
+      "description": "Learn design theory, typography, and color principles for effective visual communication.",
+      "category": "design",
+      "level": "beginner",
+      "provider": "Adobe Creative",
+      "duration": "4 weeks",
+      "rating": 4.4,
+      "url": "https://www.adobe.com/creativecloud/design.html",
+      "icon": "🖼️"
+    },
+    {
+      "id": 8,
+      "title": "Data Science Basics",
+      "description": "Introduction to data analysis, statistics, and machine learning concepts.",
+      "category": "programming",
+      "level": "intermediate",
+      "provider": "Kaggle Learn",
+      "duration": "6 weeks",
+      "rating": 4.6,
+      "url": "https://www.kaggle.com/learn",
+      "icon": "📊"
+    }
+  ]
+}

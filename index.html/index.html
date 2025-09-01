@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Free Courses & Internships</title>
+    <style>
+        /* === RESET & BASE STYLES === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section {
+            min-height: 100vh;
+        }
+
+        /* === NAVIGATION === */
+        .navbar {
+            background: #ffffff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo h2 {
+            color: #4f46e5;
+            font-size: 1.5rem;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+            cursor: pointer;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .hero-btn {
+            background: #ffffff;
+            color: #4f46e5;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        /* === SEARCH SECTION === */
+        .search-section {
+            padding: 4rem 0;
+            background: white;
+            display: none;
+        }
+
+        .search-section.active {
+            display: block;
+        }
+
+        .search-section h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+            font-size: 2rem;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            gap: 10px;
+        }
+
+        .search-bar input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #4f46e5;
+        }
+
+        .search-bar button {
+            background: #4f46e5;
+            color: white;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filters select {
+            padding: 10px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+            color: #6b7280;
+        }
+
+        .tab-btn.active {
+            color: #4f46e5;
+            border-bottom-color: #4f46e5;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* === CARDS === */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            padding: 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            height: 150px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            color: white;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .card-description {
+            color: #6b7280;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+
+        .card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .card-category {
+            background: #ede9fe;
+            color: #5b21b6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .card-level {
+            font-size: 0.875rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .bookmark-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #d1d5db;
+            transition: color 0.3s;
+            z-index: 10;
+        }
+
+        .bookmark-btn:hover,
+        .bookmark-btn.bookmarked {
+            color: #ef4444;
+        }
+
+        /* === DASHBOARD === */
+        .dashboard {
+            display: none;
+            padding: 4rem 0;
+            background: white;
+        }
+
+        .dashboard.active {
+            display: block;
+        }
+
+        .dashboard-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            color: #1f2937;
+            margin-bottom: 1rem;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .saved-sections {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .saved-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .saved-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .saved-item:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .saved-item-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .saved-item-meta {
+            font-size: 0.875rem;
+            color: #6b7280;
+        }
+
+        /* === MODAL === */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 15px 15px 0 0;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+
+        .modal-close:hover {
+            opacity: 1;
+        }
+
+        .modal-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-provider {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #4b5563;
+            margin-bottom: 2rem;
+        }
+
+        .modal-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .detail-box {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .detail-label {
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .action-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .btn-primary {
+            background: #4f46e5;
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            background: #3730a3;
+        }
+
+        .btn-bookmark {
+            background: #f3f4f6;
+            color: #374151;
+            padding: 12px 16px;
+            font-size: 1.2rem;
+        }
+
+        .btn-bookmark.bookmarked {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        /* === NOTIFICATION === */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* === LOADING === */
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        /* === FOOTER === */
+        footer {
+            background: #1f2937;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 768px) {
+            .nav-menu {
+                gap: 1rem;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .search-bar {
+                flex-direction: column;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .filters select {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .saved-sections {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>SkillBridge</h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a id="nav-home" class="active" onclick="showSection('home')">Home</a></li>
+                <li><a id="nav-explore" onclick="showSection('explore')">Explore</a></li>
+                <li><a id="nav-dashboard" onclick="showSection('dashboard')">My Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME SECTION -->
+    <section id="home" class="hero section">
+        <div class="hero-content">
+            <h1>Bridge Your Skills Gap</h1>
+            <p>Discover free courses and internship opportunities to advance your career and build your future</p>
+            <button class="hero-btn" onclick="showSection('explore')">Start Learning</button>
+        </div>
+    </section>
+
+    <!-- EXPLORE SECTION -->
+    <section id="explore" class="search-section section">
+        <div class="container">
+            <h2>Find Your Perfect Course or Internship</h2>
+            
+            <!-- Search Bar -->
+            <div class="search-bar">
+                <input type="text" id="searchInput" placeholder="Search courses, internships, skills...">
+                <button onclick="performSearch()">Search</button>
+            </div>
+
+            <!-- Filters -->
+            <div class="filters">
+                <select id="categoryFilter" onchange="performSearch()">
+                    <option value="">All Categories</option>
+                    <option value="programming">Programming</option>
+                    <option value="design">Design</option>
+                    <option value="business">Business</option>
+                    <option value="marketing">Marketing</option>
+                </select>
+
+                <select id="levelFilter" onchange="performSearch()">
+                    <option value="">All Levels</option>
+                    <option value="beginner">Beginner</option>
+                    <option value="intermediate">Intermediate</option>
+                    <option value="advanced">Advanced</option>
+                </select>
+            </div>
+
+            <!-- Tabs -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="showTab('courses')">Free Courses</button>
+                <button class="tab-btn" onclick="showTab('internships')">Internships</button>
+            </div>
+
+            <!-- Results -->
+            <div id="results-container">
+                <div id="courses-content" class="tab-content active">
+                    <div class="cards-grid" id="courses-grid">
+                        <div class="loading">Loading courses...</div>
+                    </div>
+                </div>
+
+                <div id="internships-content" class="tab-content">
+                    <div class="cards-grid" id="internships-grid">
+                        <div class="loading">Loading internships...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DASHBOARD SECTION -->
+    <section id="dashboard" class="dashboard section">
+        <div class="container">
+            <div class="dashboard-header">
+                <h2 class="dashboard-title">My Learning Dashboard</h2>
+                <p>Track your progress and manage your saved learning opportunities</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <div class="stat-number" id="saved-courses-count">0</div>
+                    <div class="stat-label">Saved Courses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="saved-internships-count">0</div>
+                    <div class="stat-label">Saved Internships</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="total-saved-count">0</div>
+                    <div class="stat-label">Total Saved</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="categories-count">0</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+            </div>
+
+            <!-- Saved Items -->
+            <div class="saved-sections">
+                <div class="saved-section">
+                    <h3>📚 My Saved Courses</h3>
+                    <div id="saved-courses-list">
+                        <p style="color: #6b7280; text-align: center; padding: 2rem;">
+                            No courses saved yet. <span style="color: #4f46e5; cursor: pointer;" onclick="showSection('explore')">Start exploring</span> and bookmark courses!
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="saved-section">
+                    <h3>💼 My Saved Internships</h3>
+                    <div id="saved-internships-list">
+                        <p style="color: #6b7280; text-align: center; padding: 2rem;">
+                            No internships saved yet. <span style="color: #4f46e5; cursor: pointer;" onclick="showSection('explore')">Browse internships</span> and save your favorites!
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL -->
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <div class="modal-icon" id="modal-icon">💻</div>
+                <h2 class="modal-title" id="modal-title">Course Title</h2>
+                <p class="modal-provider" id="modal-provider">Provider</p>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description" id="modal-description">Description...</p>
+                
+                <div class="modal-details" id="modal-details">
+                    <!-- Details populated by JavaScript -->
+                </div>
+                
+                <div class="modal-actions">
+                    <a href="#" target="_blank" class="action-btn btn-primary" id="modal-action-btn">
+                        Start Learning
+                    </a>
+                    <button class="action-btn btn-bookmark" id="modal-bookmark-btn" onclick="toggleModalBookmark()">
+                        🤍
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 SkillBridge. Empowering learners worldwide through accessible education.</p>
+        </div>
+    </footer>
+
+    <script>
+        // ========================================
+        // GLOBAL VARIABLES
+        // ========================================
+        let coursesData = [];
+        let internshipsData = [];
+        let bookmarkedItems = JSON.parse(localStorage.getItem('skillbridge_bookmarked')) || [];
+        let currentModalItem = null;
+
+        // ========================================
+        // SAMPLE DATA
+        // ========================================
+        const sampleCourses = [
+            {
+                id: 1,
+                title: "JavaScript for Beginners",
+                description: "Learn JavaScript programming from scratch. This comprehensive course covers variables, functions, DOM manipulation, and modern ES6+ features. Perfect for complete beginners who want to start their web development journey with hands-on projects and real-world examples.",
+                category: "programming",
+                level: "beginner",
+                provider: "FreeCodeCamp",
+                duration: "6 weeks",
+                rating: 4.8,
+                students: "2.1M",
+                certificate: "Yes",
+                prerequisites: "None",
+                url: "https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/",
+                icon: "💻",
+                skills: ["JavaScript", "DOM", "ES6", "Problem Solving"]
+            },
+            {
+                id: 2,
+                title: "Web Design Fundamentals",
+                description: "Master HTML, CSS, and responsive design principles to create beautiful, modern websites. Learn about typography, color theory, user experience design, and how to make websites that work perfectly on all devices from mobile to desktop.",
+                category: "design",
+                level: "beginner",
+                provider: "Google Design",
+                duration: "4 weeks",
+                rating: 4.6,
+                students: "890K",
+                certificate: "Yes",
+                prerequisites: "Basic computer skills",
+                url: "https://www.coursera.org/learn/web-design",
+                icon: "🎨",
+                skills: ["HTML", "CSS", "Responsive Design", "UI/UX"]
+            },
+            {
+                id: 3,
+                title: "Digital Marketing Basics",
+                description: "Learn SEO, social media marketing, content creation strategies, and analytics. Understand how to build and execute digital marketing campaigns that drive real business results. Perfect for entrepreneurs and marketing professionals.",
+                category: "marketing",
+                level: "beginner",
+                provider: "Google Digital Garage",
+                duration: "3 weeks",
+                rating: 4.5,
+                students: "1.5M",
+                certificate: "Yes",
+                prerequisites: "None",
+                url: "https://learndigital.withgoogle.com/digitalgarage",
+                icon: "📱",
+                skills: ["SEO", "Social Media", "Content Marketing", "Analytics"]
+            },
+            {
+                id: 4,
+                title: "React Development",
+                description: "Build modern web applications with React.js. Learn about components, hooks, state management, and building scalable applications. This course covers everything from basic concepts to advanced patterns used in production applications.",
+                category: "programming",
+                level: "intermediate",
+                provider: "React Training",
+                duration: "8 weeks",
+                rating: 4.9,
+                students: "750K",
+                certificate: "Yes",
+                prerequisites: "JavaScript basics",
+                url: "https://reacttraining.com/",
+                icon: "⚛️",
+                skills: ["React", "JSX", "Hooks", "State Management"]
+            },
+            {
+                id: 5,
+                title: "Business Strategy",
+                description: "Learn how to develop effective business strategies, analyze markets, and make strategic decisions that drive business growth. This course combines theory with practical case studies from successful companies.",
+                category: "business",
+                level: "intermediate",
+                provider: "Harvard Business School",
+                duration: "5 weeks",
+                rating: 4.7,
+                students: "420K",
+                certificate: "Yes",
+                prerequisites: "Basic business knowledge",
+                url: "https://online.hbs.edu/",
+                icon: "📊",
+                skills: ["Strategy", "Market Analysis", "Leadership", "Decision Making"]
+            },
+            {
+                id: 6,
+                title: "Python Programming",
+                description: "Master Python programming with hands-on projects and real-world applications. Learn data structures, algorithms, and popular Python libraries. Perfect for beginners who want to start their programming journey or professionals looking to add Python to their skillset.",
+                category: "programming",
+                level: "beginner",
+                provider: "Codecademy",
+                duration: "7 weeks",
+                rating: 4.8,
+                students: "1.8M",
+                certificate: "Yes",
+                prerequisites: "None",
+                url: "https://www.codecademy.com/learn/learn-python-3",
+                icon: "🐍",
+                skills: ["Python", "Data Structures", "Algorithms", "Libraries"]
+            }
+        ];
+
+        const sampleInternships = [
+            {
+                id: 101,
+                title: "Frontend Developer Intern",
+                description: "Join our development team to work on React applications and learn modern web development. You'll collaborate with senior developers, contribute to real projects, and gain experience with industry-standard tools and practices.",
+                company: "TechStart Inc",
+                location: "Remote",
+                category: "programming",
+                level: "intermediate",
+                duration: "3 months",
+                paid: true,
+                salary: "$1500/month",
+                requirements: ["React", "JavaScript", "CSS", "Git"],
+                url: "https://techstart.com/careers",
+                icon: "💻",
+                type: "internship"
+            },
+            {
+                id: 102,
+                title: "UX Design Intern",
+                description: "Create user-centered designs and collaborate with our product team on exciting projects. Learn industry-standard design processes, conduct user research, and work on real products used by thousands of customers.",
+                company: "Design Studio",
+                location: "New York, NY",
+                category: "design",
+                level: "beginner",
+                duration: "4 months",
+                paid: true,
+                salary: "$1200/month",
+                requirements: ["Figma", "Design Thinking", "Prototyping"],
+                url: "https://designstudio.com/careers",
+                icon: "🎨",
+                type: "internship"
+            },
+            {
+                id: 103,
+                title: "Marketing Intern",
+                description: "Help grow our brand through content creation, social media management, and digital campaigns. Perfect for aspiring marketers who want to gain hands-on experience with real marketing campaigns and analytics.",
+                company: "Marketing Agency",
+                location: "Remote",
+                category: "marketing",
+                level: "beginner",
+                duration: "3 months",
+                paid: false,
+                salary: "Unpaid + Certificate",
+                requirements: ["Social Media", "Content Writing", "Analytics"],
+                url: "https://marketingagency.com/jobs",
+                icon: "📱",
+                type: "internship"
+            },
+            {
+                id: 104,
+                title: "Business Analyst Intern",
+                description: "Analyze business data and help implement process improvements using data-driven insights. Great opportunity for analytical minds to work with real business data and contribute to strategic decisions.",
+                company: "Consulting Firm",
+                location: "Chicago, IL",
+                category: "business",
+                level: "intermediate",
+                duration: "6 months",
+                paid: true,
+                salary: "$1800/month",
+                requirements: ["Excel", "Data Analysis", "SQL", "PowerBI"],
+                url: "https://consultingfirm.com/careers",
+                icon: "📊",
+                type: "internship"
+            }
+        ];
+
+        // ========================================
+        // INITIALIZATION
+        // ========================================
+        document.addEventListener('DOMContentLoaded', function() {
+            coursesData = sampleCourses;
+            internshipsData = sampleInternships;
+            
+            displayCourses(coursesData);
+            displayInternships(internshipsData);
+            updateDashboard();
+            
+            // Setup search
+            document.getElementById('searchInput').addEventListener('input', performSearch);
+        });
+
+        // ========================================
+        // NAVIGATION FUNCTIONS
+        // ========================================
+        function showSection(sectionName) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.style.display = 'none';
+            });
+            
+            // Show selected section
+            document.getElementById(sectionName).style.display = 'block';
+            
+            // Update navigation
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            if (sectionName === 'explore') {
+                document.getElementById('nav-explore').classList.add('active');
+            } else if (sectionName === 'dashboard') {
+                document.getElementById('nav-dashboard').classList.add('active');
+                updateDashboard();
+            } else {
+                document.getElementById('nav-home').classList.add('active');
+            }
+        }
+
+        // ========================================
+        // DISPLAY FUNCTIONS
+        // ========================================
+        function displayCourses(courses) {
+            const coursesGrid = document.getElementById('courses-grid');
+            if (courses.length === 0) {
+                coursesGrid.innerHTML = '<div class="loading">No courses found matching your criteria.</div>';
+                return;
+            }
+            coursesGrid.innerHTML = courses.map(course => createCourseCard(course)).join('');
+        }
+
+        function displayInternships(internships) {
+            const internshipsGrid = document.getElementById('internships-grid');
+            if (internships.length === 0) {
+                internshipsGrid.innerHTML = '<div class="loading">No internships found matching your criteria.</div>';
+                return;
+            }
+            internshipsGrid.innerHTML = internships.map(internship => createInternshipCard(internship)).join('');
+        }
+
+        function createCourseCard(course) {
+            const isBookmarked = bookmarkedItems.some(item => item.id === course.id && item.type === 'course');
+            const bookmarkSymbol = isBookmarked ? '❤️' : '🤍';
+
+            return `
+                <div class="card" onclick="showDetailModal(${course.id}, 'course')">
+                    <div class="card-header">
+                        <div class="card-icon">${course.icon}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${course.title}</h3>
+                        <p class="card-description">${course.description.substring(0, 120)}...</p>
+                        <div class="card-meta">
+                            <span class="card-category">${capitalize(course.category)}</span>
+                            <span class="card-level">${capitalize(course.level)}</span>
+                        </div>
+                        <div class="card-footer">
+                            <span style="color: #4f46e5; font-weight: 600;">Click for details</span>
+                            <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
+                                    onclick="event.stopPropagation(); toggleBookmark(${course.id}, 'course', this)">
+                                ${bookmarkSymbol}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function createInternshipCard(internship) {
+            const isBookmarked = bookmarkedItems.some(item => item.id === internship.id && item.type === 'internship');
+            const bookmarkSymbol = isBookmarked ? '❤️' : '🤍';
+            const paidBadge = internship.paid ? '💰 Paid' : '📚 Unpaid';
+
+            return `
+                <div class="card" onclick="showDetailModal(${internship.id}, 'internship')">
+                    <div class="card-header">
+                        <div class="card-icon">${internship.icon}</div>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="card-title">${internship.title}</h3>
+                        <p class="card-description">${internship.description.substring(0, 120)}...</p>
+                        <div style="margin: 0.5rem 0; font-size: 0.9rem; color: #6b7280;">
+                            📍 ${internship.location} | ⏱️ ${internship.duration}
+                        </div>
+                        <div class="card-meta">
+                            <span class="card-category">${capitalize(internship.category)}</span>
+                            <span class="card-level">${paidBadge}</span>
+                        </div>
+                        <div class="card-footer">
+                            <span style="color: #4f46e5; font-weight: 600;">Click for details</span>
+                            <button class="bookmark-btn ${isBookmarked ? 'bookmarked' : ''}" 
+                                    onclick="event.stopPropagation(); toggleBookmark(${internship.id}, 'internship', this)">
+                                ${bookmarkSymbol}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // ========================================
+        // MODAL FUNCTIONS
+        // ========================================
+        function showDetailModal(itemId, itemType) {
+            const item = itemType === 'course' 
+                ? coursesData.find(course => course.id === itemId)
+                : internshipsData.find(internship => internship.id === itemId);
+            
+            if (!item) return;
+            
+            currentModalItem = { ...item, type: itemType };
+            
+            // Update modal content
+            document.getElementById('modal-icon').textContent = item.icon;
+            document.getElementById('modal-title').textContent = item.title;
+            document.getElementById('modal-provider').textContent = itemType === 'course' ? item.provider : item.company;
+            document.getElementById('modal-description').textContent = item.description;
+            
+            // Create details
+            const detailsContainer = document.getElementById('modal-details');
+            
+            if (itemType === 'course') {
+                detailsContainer.innerHTML = `
+                    <div class="detail-box">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">${item.duration}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Level</div>
+                        <div class="detail-value">${capitalize(item.level)}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Rating</div>
+                        <div class="detail-value">⭐ ${item.rating}/5</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Students</div>
+                        <div class="detail-value">${item.students}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Certificate</div>
+                        <div class="detail-value">${item.certificate}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Prerequisites</div>
+                        <div class="detail-value">${item.prerequisites}</div>
+                    </div>
+                `;
+            } else {
+                detailsContainer.innerHTML = `
+                    <div class="detail-box">
+                        <div class="detail-label">Company</div>
+                        <div class="detail-value">${item.company}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Location</div>
+                        <div class="detail-value">${item.location}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Duration</div>
+                        <div class="detail-value">${item.duration}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Compensation</div>
+                        <div class="detail-value">${item.salary}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Level</div>
+                        <div class="detail-value">${capitalize(item.level)}</div>
+                    </div>
+                    <div class="detail-box">
+                        <div class="detail-label">Type</div>
+                        <div class="detail-value">${item.paid ? 'Paid' : 'Unpaid'}</div>
+                    </div>
+                `;
+            }
+            
+            // Update buttons
+            const actionBtn = document.getElementById('modal-action-btn');
+            actionBtn.href = item.url;
+            actionBtn.textContent = itemType === 'course' ? 'Start Learning' : 'Apply Now';
+            
+            const isBookmarked = bookmarkedItems.some(saved => saved.id === item.id && saved.type === itemType);
+            const bookmarkBtn = document.getElementById('modal-bookmark-btn');
+            bookmarkBtn.textContent = isBookmarked ? '❤️' : '🤍';
+            bookmarkBtn.classList.toggle('bookmarked', isBookmarked);
+            
+            // Show modal
+            document.getElementById('detailModal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+            currentModalItem = null;
+        }
+
+        function toggleModalBookmark() {
+            if (!currentModalItem) return;
+            
+            const existingIndex = bookmarkedItems.findIndex(item => 
+                item.id === currentModalItem.id && item.type === currentModalItem.type
+            );
+            
+            const bookmarkBtn = document.getElementById('modal-bookmark-btn');
+            
+            if (existingIndex > -1) {
+                bookmarkedItems.splice(existingIndex, 1);
+                bookmarkBtn.textContent = '🤍';
+                bookmarkBtn.classList.remove('bookmarked');
+                showNotification('Removed from saved items');
+            } else {
+                bookmarkedItems.push(currentModalItem);
+                bookmarkBtn.textContent = '❤️';
+                bookmarkBtn.classList.add('bookmarked');
+                showNotification('Saved to your collection!');
+            }
+            
+            localStorage.setItem('skillbridge_bookmarked', JSON.stringify(bookmarkedItems));
+            updateDashboard();
+            
+            // Update card if visible
+            updateAllBookmarkButtons();
+        }
+
+        // ========================================
+        // DASHBOARD FUNCTIONS
+        // ========================================
+        function updateDashboard() {
+            const savedCourses = bookmarkedItems.filter(item => item.type === 'course');
+            const savedInternships = bookmarkedItems.filter(item => item.type === 'internship');
+            const categories = [...new Set(bookmarkedItems.map(item => item.category))];
+            
+            // Update stats
+            document.getElementById('saved-courses-count').textContent = savedCourses.length;
+            document.getElementById('saved-internships-count').textContent = savedInternships.length;
+            document.getElementById('total-saved-count').textContent = bookmarkedItems.length;
+            document.getElementById('categories-count').textContent = categories.length;
+            
+            // Update lists
+            updateSavedList('saved-courses-list', savedCourses, 'course');
+            updateSavedList('saved-internships-list', savedInternships, 'internship');
+        }
+
+        function updateSavedList(listId, items, type) {
+            const listContainer = document.getElementById(listId);
+            
+            if (items.length === 0) {
+                const emptyMessage = type === 'course' 
+                    ? 'No courses saved yet. <span style="color: #4f46e5; cursor: pointer;" onclick="showSection(\'explore\')">Start exploring</span> and bookmark courses!'
+                    : 'No internships saved yet. <span style="color: #4f46e5; cursor: pointer;" onclick="showSection(\'explore\')">Browse internships</span> and save your favorites!';
+                    
+                listContainer.innerHTML = `
+                    <p style="color: #6b7280; text-align: center; padding: 2rem;">
+                        ${emptyMessage}
+                    </p>
+                `;
+            } else {
+                listContainer.innerHTML = items.map(item => `
+                    <div class="saved-item" onclick="showDetailModal(${item.id}, '${type}')">
+                        <div class="saved-item-title">${item.icon} ${item.title}</div>
+                        <div class="saved-item-meta">
+                            ${type === 'course' ? item.provider : item.company} • ${item.duration} • ${capitalize(item.level)}
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // ========================================
+        // TAB FUNCTIONS
+        // ========================================
+        function showTab(tabName) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            event.target.classList.add('active');
+            document.getElementById(tabName + '-content').classList.add('active');
+        }
+
+        // ========================================
+        // SEARCH FUNCTIONS
+        // ========================================
+        function performSearch() {
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const selectedCategory = document.getElementById('categoryFilter').value;
+            const selectedLevel = document.getElementById('levelFilter').value;
+
+            const filteredCourses = coursesData.filter(course => {
+                const matchesSearch = !searchTerm || 
+                                    course.title.toLowerCase().includes(searchTerm) ||
+                                    course.description.toLowerCase().includes(searchTerm) ||
+                                    course.provider.toLowerCase().includes(searchTerm) ||
+                                    (course.skills && course.skills.some(skill => skill.toLowerCase().includes(searchTerm)));
+                const matchesCategory = !selectedCategory || course.category === selectedCategory;
+                const matchesLevel = !selectedLevel || course.level === selectedLevel;
+                
+                return matchesSearch && matchesCategory && matchesLevel;
+            });
+
+            const filteredInternships = internshipsData.filter(internship => {
+                const matchesSearch = !searchTerm ||
+                                    internship.title.toLowerCase().includes(searchTerm) ||
+                                    internship.description.toLowerCase().includes(searchTerm) ||
+                                    internship.company.toLowerCase().includes(searchTerm) ||
+                                    (internship.requirements && internship.requirements.some(req => req.toLowerCase().includes(searchTerm)));
+                const matchesCategory = !selectedCategory || internship.category === selectedCategory;
+                const matchesLevel = !selectedLevel || internship.level === selectedLevel;
+                
+                return matchesSearch && matchesCategory && matchesLevel;
+            });
+
+            displayCourses(filteredCourses);
+            displayInternships(filteredInternships);
+        }
+
+        // ========================================
+        // BOOKMARK FUNCTIONS
+        // ========================================
+        function toggleBookmark(itemId, itemType, buttonElement) {
+            const existingIndex = bookmarkedItems.findIndex(item => item.id === itemId && item.type === itemType);
+            
+            if (existingIndex > -1) {
+                bookmarkedItems.splice(existingIndex, 1);
+                buttonElement.classList.remove('bookmarked');
+                buttonElement.textContent = '🤍';
+                showNotification('Removed from saved items');
+            } else {
+                const itemData = itemType === 'course' 
+                    ? coursesData.find(course => course.id === itemId)
+                    : internshipsData.find(internship => internship.id === itemId);
+                    
+                if (itemData) {
+                    bookmarkedItems.push({ ...itemData, type: itemType });
+                    buttonElement.classList.add('bookmarked');
+                    buttonElement.textContent = '❤️';
+                    showNotification('Saved to your collection!');
+                }
+            }
+            
+            localStorage.setItem('skillbridge_bookmarked', JSON.stringify(bookmarkedItems));
+            updateDashboard();
+        }
+
+        function updateAllBookmarkButtons() {
+            document.querySelectorAll('.bookmark-btn').forEach(btn => {
+                const onclickAttr = btn.getAttribute('onclick');
+                if (onclickAttr) {
+                    const matches = onclickAttr.match(/toggleBookmark\((\d+), '(\w+)'/);
+                    if (matches) {
+                        const itemId = parseInt(matches[1]);
+                        const itemType = matches[2];
+                        const isBookmarked = bookmarkedItems.some(item => item.id === itemId && item.type === itemType);
+                        btn.textContent = isBookmarked ? '❤️' : '🤍';
+                        btn.classList.toggle('bookmarked', isBookmarked);
+                    }
+                }
+            });
+        }
+
+        // ========================================
+        // UTILITY FUNCTIONS
+        // ========================================
+        function showNotification(message) {
+            const existingNotification = document.querySelector('.notification');
+            if (existingNotification) {
+                existingNotification.remove();
+            }
+            
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                if (notification) {
+                    notification.remove();
+                }
+            }, 3000);
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        // ========================================
+        // EVENT LISTENERS
+        // ========================================
+        
+        // Close modal when clicking outside
+        document.addEventListener('click', function(event) {
+            const modal = document.getElementById('detailModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // ========================================
+        // CONSOLE LOGS
+        // ========================================
+        console.log('✅ SkillBridge Platform Loaded Successfully!');
+        console.log('📚 Courses:', sampleCourses.length);
+        console.log('💼 Internships:', sampleInternships.length);
+        console.log('🔖 Saved Items:', bookmarkedItems.length);
+    </script>
+</body>
+</html>

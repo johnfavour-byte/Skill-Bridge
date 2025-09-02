@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkillBridge - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow: hidden;
+        }
+
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: all 0.5s ease-in-out;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #1f2937;
+        }
+
+        .slide h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #4f46e5;
+        }
+
+        .slide p {
+            font-size: 1.3rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-bottom: 2rem;
+            color: #4b5563;
+        }
+
+        .slide ul {
+            font-size: 1.2rem;
+            line-height: 2;
+            max-width: 600px;
+            text-align: left;
+            color: #374151;
+        }
+
+        .slide ul li {
+            margin-bottom: 0.5rem;
+            list-style: none;
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .slide ul li::before {
+            content: "✅";
+            position: absolute;
+            left: 0;
+        }
+
+        .problem-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .stat-box {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .solution-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .feature-box {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .feature-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .feature-desc {
+            font-size: 1rem;
+            color: #6b7280;
+            line-height: 1.4;
+        }
+
+        .tech-stack {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .tech-item {
+            background: #f3f4f6;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .impact-metrics {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .metric-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .navigation {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: translateY(-2px);
+        }
+
+        .slide-counter {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+
+        .demo-mockup {
+            width: 600px;
+            height: 400px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .demo-mockup::before {
+            content: "🖥️";
+            font-size: 4rem;
+            opacity: 0.3;
+            position: absolute;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .timeline-item {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-top: 4px solid #4f46e5;
+        }
+
+        .timeline-day {
+            font-weight: bold;
+            color: #4f46e5;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-task {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, #4f46e5, #3730a3);
+            color: white;
+            padding: 3rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .cta-button {
+            background: white;
+            color: #4f46e5;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin-top: 1rem;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .slide h1 { font-size: 2.5rem; }
+            .slide h2 { font-size: 2rem; }
+            .slide p { font-size: 1.1rem; }
+            .problem-stats { grid-template-columns: 1fr; }
+            .solution-features { grid-template-columns: 1fr; }
+            .impact-metrics { grid-template-columns: repeat(2, 1fr); }
+            .timeline { grid-template-columns: repeat(2, 1fr); }
+            .demo-mockup { width: 90%; height: 300px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="slide-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <h1>SkillBridge</h1>
+            <p>Bridging the gap between learning and opportunity</p>
+            <div style="font-size: 4rem; margin: 2rem 0;">🌉</div>
+            <p style="font-size: 1.1rem; color: #6b7280;">
+                A platform connecting students with free courses and internship opportunities<br>
+                <strong>SDG 4: Quality Education - Lifelong Learning</strong>
+            </p>
+        </div>
+
+        <!-- Slide 2: Problem -->
+        <div class="slide">
+            <h2>The Problem We're Solving</h2>
+            <p>Students and graduates face significant barriers to skill development and career advancement</p>
+            
+            <div class="problem-stats">
+                <div class="stat-box">
+                    <div class="stat-number">73%</div>
+                    <div class="stat-label">of students struggle to find relevant courses</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$50B</div>
+                    <div class="stat-label">global skills gap economic impact</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">2hrs</div>
+                    <div class="stat-label">average time wasted searching daily</div>
+                </div>
+            </div>
+
+            <ul>
+                <li>Scattered information across multiple platforms</li>
+                <li>No personalized learning path guidance</li>
+                <li>Difficulty connecting education to job opportunities</li>
+                <li>Lack of progress tracking and motivation</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: Solution -->
+        <div class="slide">
+            <h2>Our Solution: SkillBridge Platform</h2>
+            <p>A unified platform that makes skill development accessible, trackable, and career-focused</p>
+
+            <div class="solution-features">
+                <div class="feature-box">
+                    <div class="feature-icon">🔍</div>
+                    <div class="feature-title">Smart Course Discovery</div>
+                    <div class="feature-desc">Advanced search across courses, skills, and providers with intelligent filtering</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">💼</div>
+                    <div class="feature-title">Integrated Internships</div>
+                    <div class="feature-desc">Seamlessly connect learning with real job opportunities and career paths</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Personal Dashboard</div>
+                    <div class="feature-desc">Track progress, manage bookmarks, and visualize your learning journey</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Detailed Insights</div>
+                    <div class="feature-desc">Rich course information, prerequisites, ratings, and career relevance</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Demo -->
+        <div class="slide">
+            <h2>Platform Demo</h2>
+            <div class="demo-mockup">
+                <div style="text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 1rem;">🖥️ Live Demo</div>
+                    <div style="font-size: 1.2rem;">Interactive SkillBridge Platform</div>
+                    <div style="font-size: 1rem; opacity: 0.8; margin-top: 1rem;">
+                        • Course Discovery & Search<br>
+                        • Detailed Modal Views<br>
+                        • Personal Dashboard<br>
+                        • Bookmark Management
+                    </div>
+                </div>
+            </div>
+            <p><strong>Key Features to Demo:</strong></p>
+            <ul style="font-size: 1.1rem;">
+                <li>Browse 1000+ courses and internships</li>
+                <li>Click any card for detailed information</li>
+                <li>Smart search and filtering system</li>
+                <li>Personal dashboard with progress tracking</li>
+                <li>Mobile-responsive design</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: Technical Implementation -->
+        <div class="slide">
+            <h2>Technical Implementation</h2>
+            <p>Built with modern web technologies for scalability and user experience</p>
+
+            <div class="tech-stack">
+                <div class="tech-item">HTML5/CSS3</div>
+                <div class="tech-item">JavaScript ES6+</div>
+                <div class="tech-item">LocalStorage API</div>
+                <div class="tech-item">Responsive Design</div>
+                <div class="tech-item">RESTful Architecture</div>
+            </div>
+
+            <div style="margin: 2rem 0;">
+                <h3>Development Timeline (6 Days)</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-day">Day 1-2</div>
+                        <div class="timeline-task">Core platform & UI design</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Day 3-4</div>
+                        <div class="timeline-task">Search functionality & data integration</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Day 5</div>
+                        <div class="timeline-task">Dashboard & modal features</div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-day">Day 6</div>
+                        <div class="timeline-task">Polish, testing & deployment</div>
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+                <li>Mobile-first responsive design</li>
+                <li>Progressive Web App capabilities</li>
+                <li>Offline bookmark storage</li>
+                <li>Modular, scalable architecture</li>
+            </ul>
+        </div>
+
+        <!-- Slide 6: Impact & Metrics -->
+        <div class="slide">
+            <h2>Potential Impact & Success Metrics</h2>
+            <p>Measuring our contribution to SDG 4: Quality Education</p>
+
+            <div class="impact-metrics">
+                <div class="metric-box">
+                    <div class="metric-number">10K+</div>
+                    <div class="metric-label">Students Reached (Year 1)</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number">5M+</div>
+                    <div class="metric-label">Courses Accessible</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number">75%</div>
+                    <div class="metric-label">Time Saved Searching</div>
+                </div>
+                <div class="metric-box">
+                    <div class="metric-number">500+</div>
+                    <div class="metric-label">Career Transitions</div>
+                </div>
+            </div>
+
+            <ul>
+                <li>Reduce average course discovery time from 2 hours to 15 minutes</li>
+                <li>Increase course completion rates through better matching</li>
+                <li>Bridge the skills gap with targeted internship connections</li>
+                <li>Create pathways from education to employment</li>
+                <li>Support lifelong learning and career development</li>
+            </ul>
+        </div>
+
+        <!-- Slide 7: Business Model & Sustainability -->
+        <div class="slide">
+            <h2>Business Model & Sustainability</h2>
+            <p>Sustainable growth while maintaining accessibility for all learners</p>
+
+            <div class="solution-features">
+                <div class="feature-box">
+                    <div class="feature-icon">🆓</div>
+                    <div class="feature-title">Freemium Model</div>
+                    <div class="feature-desc">Core features free for students, premium features for institutions</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🏢</div>
+                    <div class="feature-title">B2B Partnerships</div>
+                    <div class="feature-desc">Revenue from educational institutions and corporate training programs</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-title">Analytics Services</div>
+                    <div class="feature-desc">Insights and data services for course providers and policymakers</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌱</div>
+                    <div class="feature-title">Grant Funding</div>
+                    <div class="feature-desc">Support from education and technology development grants</div>
+                </div>
+            </div>
+
+            <p><strong>Revenue Projections:</strong></p>
+            <ul>
+                <li>Year 1: $25K (pilot partnerships)</li>
+                <li>Year 2: $150K (institutional clients)</li>
+                <li>Year 3: $500K+ (scale and expansion)</li>
+            </ul>
+        </div>
+
+        <!-- Slide 8: Future Roadmap -->
+        <div class="slide">
+            <h2>Future Roadmap & Expansion</h2>
+            <p>Building towards a comprehensive lifelong learning ecosystem</p>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-day">Q1 2025</div>
+                    <div class="timeline-task">
+                        • AI-powered recommendations<br>
+                        • Mobile app launch<br>
+                        • API integrations
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Q2 2025</div>
+                    <div class="timeline-task">
+                        • Learning path builder<br>
+                        • Skill assessments<br>
+                        • Community features
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Q3 2025</div>
+                    <div class="timeline-task">
+                        • Corporate partnerships<br>
+                        • Certification tracking<br>
+                        • Mentorship matching
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">Q4 2025</div>
+                    <div class="timeline-task">
+                        • International expansion<br>
+                        • Multi-language support<br>
+                        • Advanced analytics
+                    </div>
+                </div>
+            </div>
+
+            <ul>
+                <li>Integration with major learning management systems</li>
+                <li>AI-powered career guidance and skill gap analysis</li>
+                <li>Blockchain-based certificate verification</li>
+                <li>Global expansion to emerging markets</li>
+                <li>Corporate learning and development solutions</li>
+            </ul>
+        </div>
+
+        <!-- Slide 9: Call to Action -->
+        <div class="slide">
+            <div class="cta-section">
+                <h2 style="color: white; margin-bottom: 1rem;">Join Us in Bridging the Skills Gap</h2>
+                <p style="color: white; opacity: 0.9; margin-bottom: 2rem;">
+                    SkillBridge is more than a platform—it's a movement towards accessible, 
+                    lifelong learning that empowers individuals and strengthens communities.
+                </p>
+                
+                <div style="display: flex; gap: 2rem; justify-content: center; margin-top: 2rem;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎯</div>
+                        <div>Try the Platform</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🤝</div>
+                        <div>Partner With Us</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+                        <div>Invest in Impact</div>
+                    </div>
+                </div>
+                
+                <button class="cta-button" onclick="alert('Demo the platform now!')">
+                    Experience SkillBridge Today
+                </button>
+            </div>
+
+            <p style="margin-top: 2rem; font-style: italic; color: #6b7280;">
+                "Education is the most powerful weapon which you can use to change the world." - Nelson Mandela
+            </p>
+        </div>
+
+        <!-- Slide 10: Thank You -->
+        <div class="slide">
+            <h1 style="font-size: 4rem; margin-bottom: 2rem;">Thank You!</h1>
+            <div style="font-size: 6rem; margin: 2rem 0;">🎓✨</div>
+            
+            <h3>Questions & Discussion</h3>
+            <p>Ready to bridge the skills gap together?</p>
+            
+            <div style="margin: 3rem 0; padding: 2rem; background: #f8fafc; border-radius: 12px;">
+                <div style="font-size: 1.2rem; font-weight: bold; margin-bottom: 1rem;">Contact Information</div>
+                <div>📧 demo@skillbridge.platform</div>
+                <div>🌐 skillbridge.demo</div>
+                <div>💼 LinkedIn: /skillbridge-platform</div>
+            </div>
+
+            <p style="font-size: 1.1rem; color: #4f46e5; font-weight: bold;">
+                Let's build the future of lifelong learning together! 🚀
+            </p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="navigation">
+        <button class="nav-btn" onclick="previousSlide()">← Previous</button>
+        <button class="nav-btn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <!-- Slide Counter -->
+    <div class="slide-counter">
+        <span id="current-slide">1</span> / <span id="total-slides">10</span>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        document.getElementById('total-slides').textContent = totalSlides;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('current-slide').textContent = currentSlide + 1;
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function previousSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                previousSlide();
+            }
+        });
+
+        // Auto-advance slides (optional - remove if you want manual control)
+        // setInterval(nextSlide, 10000); // 10 seconds per slide
+
+        console.log('🎯 SkillBridge Pitch Deck Loaded!');
+        console.log('Use arrow keys or buttons to navigate');
+        console.log('Total slides:', totalSlides);
+    </script>
+</body>
+</html>
